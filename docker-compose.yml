@@ -3,13 +3,14 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000  # внутри Докера запускается сервер на указанном порту
     volumes:
-      - ./app/:/usr/src/app/ecodomskotom
+      - .//:/usr/src/ecodomskotom  # пока что установил туда же где и рабочая директория
     ports:
       - 7777:8000  # первая цифра - отвечает за порт на локальной машине
+                   # вторая цифра указывает докеру какой порт слушать и передавать на локальный
     env_file:
-      - ./.env.dev
+      - ./.env.dev  # указываем где лежат скрытые переменные среды
     depends_on:
       - db
   db:
