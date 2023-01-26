@@ -2,7 +2,8 @@
 FROM python:3.9.6-alpine
 
 # set work directory / устанавливаем рабочую директорию
-WORKDIR /usr/src/app
+# сюда пренесутся все файлы из BASE_DIR
+WORKDIR /usr/src/ecodomskotom
 
 # set environment variables / устанавливаем переменные среды
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -19,11 +20,11 @@ RUN pip install -r requirements.txt
 
 # copy entrypoint.sh / копируем команду точки входа
 COPY ./entrypoint.sh .
-RUN sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
-RUN chmod +x /usr/src/app/entrypoint.sh
+RUN sed -i 's/\r$//g' /usr/src/ecodomskotom/entrypoint.sh
+RUN chmod +x /usr/src/ecodomskotom/entrypoint.sh
 
 # copy project / копируем проект
 COPY . .
 
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/ecodomskotom/entrypoint.sh"]
