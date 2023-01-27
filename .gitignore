@@ -1,0 +1,14 @@
+# .gitignore
+.idea
+
+# Environments
+env/
+venv/
+.venv
+.env
+
+# Local settings
+_project_/settings_local.py
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
