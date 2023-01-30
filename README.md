@@ -1,6 +1,6 @@
 # EcodomsKotom 
 
-# How to use #
+# How to use
 
 ### Backend requirements:
 
@@ -42,6 +42,16 @@ ALLOWED_HOSTS = ['*']
 ```    
 * and change setting for your dev DB 
 
+### If your default(5432) port already use:
+Create/init new instance by `pg_ctl`
+
+```
+initdb -D path/to/initial_db
+```
+```
+pg_ctl -D path/to/initial_db -o "-p 5433" start
+```
+
 
 ### Create and migrate database:
 
@@ -51,7 +61,7 @@ ALLOWED_HOSTS = ['*']
 
 ### Run dev server:
 
-    python manage.py runserver
+    python manage.py runserver 8000
 
 
 ### to be continuous...
