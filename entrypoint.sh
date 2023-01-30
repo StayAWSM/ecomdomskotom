@@ -11,7 +11,8 @@ then
     echo "PostgreSQL started"
 fi
 
-python manage.py flush --no-input
-python manage.py migrate
+# Вместо этих команд можно запускать в ручную команды:
+python manage.py flush --no-input  # docker-compose exec web python manage.py flush --no-input
+python manage.py migrate           # docker-compose exec web python manage.py migrate
 
 exec "$@"

@@ -37,6 +37,7 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+ALLOWED_HOSTS = ['*']
 ```    
 * and change setting for your dev DB 
 
