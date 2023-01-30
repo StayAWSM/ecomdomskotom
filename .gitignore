@@ -7,6 +7,9 @@ venv/
 .venv
 .env
 
+# Dev settings
+*.dev
+
 # Local settings
 _project_/settings_local.py
 
