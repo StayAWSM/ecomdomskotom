@@ -9,6 +9,7 @@ venv/
 
 # Dev settings
 *.dev
+.env.dev
 
 # Local settings
 _project_/settings_local.py
