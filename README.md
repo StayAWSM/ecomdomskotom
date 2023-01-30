@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['*']
 * and change setting for your dev DB 
 
 
-### Create and migrate database: 
+### Create and migrate database:
 
     createdb <project-name>  # create postgres database
     (OR sudo su postgres -c "createdb <project-name>")
