@@ -1,13 +1,14 @@
 # EcodomsKotom 
 
-# How to use #
+## How to use
 
 ### Backend requirements:
 
   1. Install `pip` - [pip.pypa.io/en/stable/installing](https://pip.pypa.io/en/stable/installing/#installation)
   2. Install `virtualenv` - [virtualenv.pypa.io/en/stable/installation](https://virtualenv.pypa.io/en/stable/installation/#installation)
   3. Install `virtualenvwrapper` - [virtualenvwrapper.readthedocs.io/en/latest/install](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#installation) or command `pip install virtualenvwrapper`
-  4. Install and run `PostgreSQL`
+  4. install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
+  5. Install and run `PostgreSQL`
 
 ### Create new project, virtualenv and install requirements: ###
 ```
@@ -21,6 +22,21 @@ mkvirtualenv --python=$(which python3.9) <project-name>
 ```
 ```pip
 pip install -r requirements.txt  # install python requirements
+```
+
+### Choose git branch
+Our git flow has a simple structure:
+- there is **main** and **stage** branch
+- create new branch according to the task/case from **stage**
+- and every task will be accepted thought **merge request**
+
+Switch to stage branch
+```
+git checkout stage #or git switch stage
+```
+Create branch for your case
+```
+git checkout -b <branchname>
 ```
 
 ### Create file `settings_local.py` in \_project_ and setup `DATABASE` and some local settings: ###
@@ -41,6 +57,16 @@ ALLOWED_HOSTS = ['*']
 ```    
 * and change setting for your dev DB 
 
+### If your default(5432) port already use:
+Create/init new instance by `pg_ctl`
+
+```
+initdb -D path/to/initial_db
+```
+```
+pg_ctl -D path/to/initial_db -o "-p 5433" start
+```
+
 
 ### Create and migrate database:
 
@@ -50,7 +76,7 @@ ALLOWED_HOSTS = ['*']
 
 ### Run dev server:
 
-    python manage.py runserver
+    python manage.py runserver 8000
 
 
 ### to be continuous...
