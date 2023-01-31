@@ -1,6 +1,6 @@
 # EcodomsKotom 
 
-# How to use
+## How to use
 
 ### Backend requirements:
 
@@ -22,6 +22,21 @@ mkvirtualenv --python=$(which python3.9) <project-name>
 ```
 ```pip
 pip install -r requirements.txt  # install python requirements
+```
+
+### Choose git branch
+Our git flow has a simple structure:
+- there is **main** and **stage** branch
+- create new branch according to the task/case from **stage**
+- and every task will be accepted thought **merge request**
+
+Switch to stage branch
+```
+git checkout stage #or git switch stage
+```
+Create branch for your case
+```
+git checkout -b <branchname>
 ```
 
 ### Create file `settings_local.py` in \_project_ and setup `DATABASE` and some local settings: ###
