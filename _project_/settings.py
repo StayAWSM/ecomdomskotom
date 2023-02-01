@@ -93,6 +93,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 try:
-    from .settings_local import *  # noqa: pylint=unused-wildcard-import
+    from .settings_local import *  # noqa
 except ImportError:
     pass
