@@ -57,17 +57,6 @@ ALLOWED_HOSTS = ['*']
 ```    
 * and change setting for your dev DB 
 
-### Errors in Windows when connect to Postgres
-
-![Error](https://sun9-30.userapi.com/impg/sMcmyCViXvtZIfTA4AOcWViaWgawx2YOVw1CHQ/1Z5WFe0vLGU.jpg?size=656x131&quality=95&sign=4ca7a20f0588f242856d4fcade7eadf1&type=album)
-
-
-When connecting postgresql, this kind of problem may occur problems
-
-in order to solve it, you need to change from localhost to 127.0.0.1:
-
-![Error](https://sun9-40.userapi.com/impg/sYzAxDjeY0fwpRIzF7iOmWY8RRwGhjGHfAgzzA/X4lKikplvd8.jpg?size=511x197&quality=95&sign=20913c3d4c37681e3fdd45665c06b371&type=album)
-
 ### If your default(5432) port already use:
 Create/init new instance by `pg_ctl`
 
