@@ -49,7 +49,7 @@ DATABASES = {
         'NAME': '<project-name>',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'localhost',  # for Windows 127.0.0.1
         'PORT': '5432'
     }
 }
