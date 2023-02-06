@@ -49,37 +49,13 @@ DATABASES = {
         'NAME': '<project-name>',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'localhost',  # for Windows 127.0.0.1
         'PORT': '5432'
     }
 }
 ALLOWED_HOSTS = ['*']
 ```    
 * and change setting for your dev DB 
-
-### Errors in Windows when connect to Postgres
-
-```
-OSError: [WinError 193] %1 не является приложением Win32
-```
-
-When connecting postgresql, this kind of problem may occur problems
-
-in order to solve it, you need to change from localhost to 127.0.0.1:
-
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': '<your name>',
-        'USER': 'postgres',
-        'PASSWORD': '<your password>',
-        'HOST': '127.0.0.1',  # HERE
-        'PORT': '5432'
-    }
-}
-```
-
 
 ### If your default(5432) port already use:
 Create/init new instance by `pg_ctl`
