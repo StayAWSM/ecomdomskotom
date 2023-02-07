@@ -45,7 +45,7 @@ DEBUG = True
 SECRET_KEY = '0n-w7wsf^3-ehi^!@m2fayppf55ecodomskotom55^l7k'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',  # for Windows django.db.backends.postgresql_psycopg2
         'NAME': '<project-name>',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
