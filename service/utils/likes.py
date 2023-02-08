@@ -1,5 +1,9 @@
 def likes(names):
-    """A function that accepts an array of people and returns the corresponding text"""
+    """
+    A function that accepts an array of people and returns the corresponding text
+
+    WARNING: Operator match-case works with Python3.10+
+    """
     match len(names):
         case 0:
             return 'No one likes this'
