@@ -9,9 +9,10 @@ class TestLikes(unittest.TestCase):
         self.assertEqual(likes(['Bob']), 'Bob likes this')
         self.assertEqual(likes(['Alex', 'Bob']), 'Alex and Bob likes this')
         self.assertEqual(likes(['Artur', 'Bob', 'John']), 'Artur, Bob and John likes this')
+        self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']), 'Artur, Bob and 2 others likes this')
 
     def test_raise(self):
         self.assertRaises(TypeError, likes, 1)
+        self.assertRaises(TypeError, likes, 45.7)
         self.assertRaises(TypeError, likes, 2)
         self.assertRaises(TypeError, likes, ('Bob', ))
-        self.assertRaises(TypeError, likes, [])
