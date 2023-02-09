@@ -4,15 +4,19 @@ def likes(names):
 
     WARNING: Operator match-case works with Python3.10+
     """
-    match len(names):
-        case 0:
-            return 'No one likes this'
-        case 1:
-            return f'{names[0]} likes this'
-        case 2:
-            return f'{names[0]} and {names[1]} likes this'
-        case 3:
-            return f'{names[0]}, {names[1]} and {names[2]} likes this'
+    try:
+        match len(names):
+            case 0:
+                return 'No one likes this'
+            case 1:
+                return f'{names[0]} likes this'
+            case 2:
+                return f'{names[0]} and {names[1]} likes this'
+            case 3:
+                return f'{names[0]}, {names[1]} and {names[2]} likes this'
 
-    if len(names) >= 4:
-        return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this'
+        if len(names) >= 4:
+            return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this'
+
+    except ValueError:
+        return 'The function accepts only an array'
