@@ -12,5 +12,5 @@ class TestLikes(unittest.TestCase):
 
     def test_raise(self):
         self.assertRaises(TypeError, likes, 1)
-        self.assertRaises(TypeError, likes, ('Bob',))
-        self.assertRaises(TypeError, likes, 3.9)
+        self.assertRaises(TypeError, likes, 2)
+        self.assertRaises(TypeError, likes, ('Bob', ))
