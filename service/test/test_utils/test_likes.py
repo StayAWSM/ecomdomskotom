@@ -14,3 +14,4 @@ class TestLikes(unittest.TestCase):
         self.assertRaises(TypeError, likes, 1)
         self.assertRaises(TypeError, likes, 2)
         self.assertRaises(TypeError, likes, ('Bob', ))
+        self.assertRaises(TypeError, likes, [])
