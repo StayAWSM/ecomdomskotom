@@ -4,7 +4,7 @@ def likes(names):
 
     WARNING: Operator match-case works with Python3.10+
     """
-    if not type(names) == list:
+    if type(names) != list:
         raise TypeError('The function accepts only an array')
 
     match len(names):
