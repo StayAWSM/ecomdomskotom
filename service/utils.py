@@ -5,7 +5,7 @@ def likes(names):
     WARNING: Operator match-case works with Python3.10+
     """
     if not isinstance(names, list):
-        raise TypeError(f'method accepts only List type. You try use {type(names)}')
+        raise TypeError(f'method accepts only List type. You tried to use {type(names)}.')
 
     match len(names):
         case 0:
