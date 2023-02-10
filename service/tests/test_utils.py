@@ -2,16 +2,16 @@ import unittest
 from service.utils import likes
 
 
-class test_likes(unittest.TestCase):
+class TestLikes(unittest.TestCase):
 
-    def test_likes_exceptions(self):
+    def test_likes(self):
         self.assertEqual(likes([]), 'No one likes this')
         self.assertEqual(likes(['Bob']), 'Bob likes this')
         self.assertEqual(likes(['Alex', 'Bob']), 'Alex and Bob like this')
         self.assertEqual(likes(['Artur', 'Bob', 'John']), 'Artur, Bob and John like this')
         self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']), 'Artur, Bob and 2 others like this')
 
-    def test_raise(self):
+    def test_likes_exceptions(self):
         self.assertRaises(TypeError, likes, 1)
         self.assertRaises(TypeError, likes, 45.7)
         self.assertRaises(TypeError, likes, {'Alex': 1})
