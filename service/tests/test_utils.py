@@ -1,5 +1,5 @@
 import unittest
-from service.utils.utils import likes
+from service.utils import likes
 
 
 class TestLikes(unittest.TestCase):
