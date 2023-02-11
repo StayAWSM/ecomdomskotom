@@ -9,11 +9,13 @@ build-job:       # This job runs in the build stage, which runs first.
   script:
     - echo "Compiling the code..."
     - echo "Compile complete."
+    - ls
 
 lint:
   stage: validate
   script:
-    - prospector --profile-path . --profile .prospector.yaml .
+#    - prospector --profile-path . --profile .prospector.yaml .
+    - prospector
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
