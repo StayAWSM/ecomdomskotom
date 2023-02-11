@@ -5,7 +5,7 @@ stages:          # List of stages for jobs, and their order of execution
   - validate
 
 default:
-  image: ubuntu:20.04
+  image: ubuntu:20.04     # Указываем операционную систему
   services:
     - python:latest
   cache:
@@ -15,11 +15,11 @@ default:
     paths:
       - .venv
   before_script:
-    - python -m venv .venv
+    - python3 -m venv .venv
     - source .venv/bin/activate
-    - pip install --upgrade pip
-    - pip install --upgrade setuptools
-    - pip install -r requirements.txt
+    - pip3 install --upgrade pip
+    - pip3 install --upgrade setuptools
+    - pip3 install -r requirements.txt
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
