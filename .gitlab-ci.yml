@@ -7,7 +7,7 @@ stages:          # List of stages for jobs, and their order of execution
 default:
   image: ubuntu:20.04     # Указываем операционную систему
   services:
-    - python:3.10
+    - python:latest
 #  cache:
 #    key:
 #      files:
