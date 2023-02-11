@@ -7,20 +7,20 @@ stages:          # List of stages for jobs, and their order of execution
 default:
   image: ubuntu:20.04     # Указываем операционную систему
   services:
-    - python:latest
-  cache:
-    key:
-      files:
-        - requirements.txt
-    paths:
-      - .venv
-  before_script:
-    - ls
-    - python3 -m venv .venv
-    - source .venv/bin/activate
-    - pip3 install --upgrade pip
-    - pip3 install --upgrade setuptools
-    - pip3 install -r requirements.txt
+    - python:3.10
+#  cache:
+#    key:
+#      files:
+#        - requirements.txt
+#    paths:
+#      - .venv
+#  before_script:
+#    - ls
+#    - python3 -m venv .venv
+#    - source .venv/bin/activate
+#    - pip3 install --upgrade pip
+#    - pip3 install --upgrade setuptools
+#    - pip3 install -r requirements.txt
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -28,6 +28,11 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
     - ls
+    - python3 -m venv .venv
+    - source .venv/bin/activate
+    - pip3 install --upgrade pip
+    - pip3 install --upgrade setuptools
+    - pip3 install -r requirements.txt
 
 lint:
   stage: validate
