@@ -4,6 +4,20 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - validate
 
+default:
+  cache:
+    key:
+      files:
+        - requirements.txt
+    paths:
+      - .venv
+  before_script:
+    - python -m venv .venv
+    - source .venv/bin/activate
+    - pip install --upgrade pip
+    - pip install --upgrade setuptools
+    - pip install -r requirements.txt
+
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
