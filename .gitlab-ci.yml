@@ -5,6 +5,9 @@ stages:          # List of stages for jobs, and their order of execution
   - validate
 
 default:
+  image: ubuntu:20.04
+  services:
+    - python:latest
   cache:
     key:
       files:
