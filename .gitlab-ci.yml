@@ -28,6 +28,7 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
     - ls
+    - uname -a
     - sudo apt-get update
     - sudo apt-get install python3.10
     - python3 -m venv .venv
