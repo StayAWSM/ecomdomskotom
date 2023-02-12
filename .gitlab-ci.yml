@@ -4,7 +4,6 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - test
   - validate
-
 #  - test
 #  - deploy
 
@@ -15,7 +14,7 @@ default:
       files:
         - requirements.txt
     paths:
-      - .venv     # из какой директории будет выполнятся команды
+      - .venv     # The directory where the commands will be executed / из какой директории будут выполнены команды
   before_script:
     - ls
     - python3 -m venv .venv

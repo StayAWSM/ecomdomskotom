@@ -5,13 +5,12 @@ ignore-paths:
   - docs
   - migrations
   - templates
-  - codegen_templates
   - .venv
   - _project_/settings_local.py
+  - _project_/celery_config.py
+  - _project_/__init__.py
   - README.md
   - lib
-  - _project_/celery_config.py
-  - accounting/utils/scripts.py
 
 pylint:
 #  options:
