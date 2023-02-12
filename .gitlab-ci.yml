@@ -43,6 +43,7 @@ build-job:       # This job runs in the build stage, which runs first.
 migrations:
   stage: build
   script:
+    - echo -e "SECRET_KEY = 'not so sectret!'\n" > ./_project_/settings_local.py
     - python3 manage.py makemigrations
     # - python3 manage.py makemigrations myapp
     - python3 manage.py migrate
