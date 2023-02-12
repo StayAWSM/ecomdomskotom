@@ -26,6 +26,7 @@ def time_online(seconds):
 
     intervals = (
         ('год', 31536000),
+        ('месяц', 2629746),
         ('неделя', 604800),  # 60 * 60 * 24 * 7
         ('день', 86400),  # 60 * 60 * 24
         ('час', 3600),  # 60 * 60
@@ -43,6 +44,10 @@ def time_online(seconds):
             seconds -= value * count
             if 2 <= value <= 4:
                 match name:
+                    case 'год':
+                        name = 'года'
+                    case 'месяц':
+                        name = 'месяца'
                     case 'неделя':
                         name = 'недели'
                     case 'день':
@@ -53,10 +58,12 @@ def time_online(seconds):
                         name = 'минуты'
                     case 'секунда':
                         name = 'секунды'
-                    case 'год':
-                        name = 'года'
             elif value >= 5:
                 match name:
+                    case 'год':
+                        name = 'лет'
+                    case 'месяц':
+                        name = 'месяцев'
                     case 'неделя':
                         name = 'недель'
                     case 'день':
@@ -67,14 +74,13 @@ def time_online(seconds):
                         name = 'минут'
                     case 'секунда':
                         name = 'секунд'
-                    case 'год':
-                        name = 'лет'
             result.append("{} {}".format(value, name))
 
+    a = ', '.join(result[:-2])  # everything except minutes and seconds
     match len(result):
         case 2:
             return f'{result[0]} и {result[1]}'
         case 1:
             return f'{result[0]}'
-
-    return f'{result[0]}, {result[1]} и {result[2]}'
+        case _:
+            return f'{a}, {result[-2]} и {result[-1]}'

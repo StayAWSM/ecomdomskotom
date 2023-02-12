@@ -25,10 +25,11 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(time_online(3600), '1 час')
         self.assertEqual(time_online(86400), '1 день')
         self.assertEqual(time_online(604800), '1 неделя')
+        self.assertEqual(time_online(2629746), '1 месяц')
+        self.assertEqual(time_online(31536000), '1 год')
         self.assertEqual(time_online(63), '1 минута и 3 секунды')
         self.assertEqual(time_online(87878), '1 день, 24 минут и 38 секунд')
-        self.assertEqual(time_online(31536000), '1 год')
-        self.assertEqual(time_online(315365611), '10 лет, 1 час и 33 минут')
+        self.assertEqual(time_online(315365611), '10 лет, 1 час, 33 минут и 31 секунд')
         self.assertEqual(time_online(0), 'Сейчас')
 
     def test_display_time_exceptions(self):
