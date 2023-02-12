@@ -7,10 +7,11 @@ ignore-paths:
   - templates
   - .venv
   - _project_/settings_local.py
+  - _project_/settings.py
   - _project_/celery_config.py
-  - _project_/__init__.py
   - README.md
   - lib
+  - service/migrations
 
 pylint:
 #  options:
