@@ -33,7 +33,7 @@ lint:
   stage: validate
   script:
 #    - prospector --profile-path . --profile .prospector.yaml .
-    - prospector
+    - prospector -X
 
 test:
   # This job runs in the test stage.
