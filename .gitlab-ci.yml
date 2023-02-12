@@ -7,8 +7,17 @@ stages:          # List of stages for jobs, and their order of execution
 #  - test
 #  - deploy
 
+variables:
+  # DJANGO_CONFIG: "test"
+  MYSQL_DATABASE: $MYSQL_DB
+  MYSQL_ROOT_PASSWORD: $MYSQL_PASS
+  MYSQL_USER: $MYSQL_USER
+  MYSQL_PASSWORD: $MYSQL_PASS
+
 
 default:
+  services:
+    - postgres:latest
   cache:
     key:
       files:
@@ -30,6 +39,15 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compile complete."
     - ls
     - uname -a
+
+migrations:
+  stage: build
+  script:
+    - python3 manage.py makemigrations
+    # - python3 manage.py makemigrations myapp
+    - python3 manage.py migrate
+    - python3 manage.py check
+
 
 lint:
   stage: validate
