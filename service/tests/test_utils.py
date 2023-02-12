@@ -1,5 +1,5 @@
 import unittest
-from service.utils import likes, display_time
+from service.utils import likes, time_online
 
 
 class TestLikes(unittest.TestCase):
@@ -21,16 +21,18 @@ class TestLikes(unittest.TestCase):
 
 class TestDisplayTime(unittest.TestCase):
     def test_display_time(self):
-        self.assertEqual(display_time(60), '1 минута')
-        self.assertEqual(display_time(3600), '1 час')
-        self.assertEqual(display_time(86400), '1 день')
-        self.assertEqual(display_time(604800), '1 неделя')
-        self.assertEqual(display_time(63), '1 минута 3 секунды')
-        self.assertEqual(display_time(87878), '1 день 24 минут 38 секунд')
-        self.assertEqual(display_time(0), 'Сейчас')
+        self.assertEqual(time_online(60), '1 минута')
+        self.assertEqual(time_online(3600), '1 час')
+        self.assertEqual(time_online(86400), '1 день')
+        self.assertEqual(time_online(604800), '1 неделя')
+        self.assertEqual(time_online(63), '1 минута и 3 секунды')
+        self.assertEqual(time_online(87878), '1 день, 24 минут и 38 секунд')
+        self.assertEqual(time_online(31536000), '1 год')
+        self.assertEqual(time_online(315365611), '10 лет, 1 час и 33 минут')
+        self.assertEqual(time_online(0), 'Сейчас')
 
     def test_display_time_exceptions(self):
-        self.assertRaises(TypeError, display_time, 45.7)
-        self.assertRaises(TypeError, display_time, {'seconds': 1})
-        self.assertRaises(TypeError, display_time, ('minutes',))
-        self.assertRaises(TypeError, display_time, {'1', '2', '3'})
+        self.assertRaises(TypeError, time_online, 45.7)
+        self.assertRaises(TypeError, time_online, {'seconds': 1})
+        self.assertRaises(TypeError, time_online, ('minutes',))
+        self.assertRaises(TypeError, time_online, {'1', '2', '3'})

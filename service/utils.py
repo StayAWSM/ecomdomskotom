@@ -20,8 +20,12 @@ def likes(names):
             return f'{names[0]}, {names[1]} and {len(names) - 2} others like this'
 
 
-def display_time(seconds, granularity=3):  # granularity - number of values
+def time_online(seconds):
+    if not isinstance(seconds, int):
+        raise TypeError(f'method accepts only Int type. You tried to use {type(seconds)}.')
+
     intervals = (
+        ('год', 31536000),
         ('неделя', 604800),  # 60 * 60 * 24 * 7
         ('день', 86400),  # 60 * 60 * 24
         ('час', 3600),  # 60 * 60
@@ -30,8 +34,6 @@ def display_time(seconds, granularity=3):  # granularity - number of values
     )
     result = []
 
-    if not isinstance(seconds, int):
-        raise TypeError(f'method accepts only Int type. You tried to use {type(seconds)}.')
     if seconds == 0:
         return 'Сейчас'
 
@@ -51,6 +53,8 @@ def display_time(seconds, granularity=3):  # granularity - number of values
                         name = 'минуты'
                     case 'секунда':
                         name = 'секунды'
+                    case 'год':
+                        name = 'года'
             elif value >= 5:
                 match name:
                     case 'неделя':
@@ -63,5 +67,14 @@ def display_time(seconds, granularity=3):  # granularity - number of values
                         name = 'минут'
                     case 'секунда':
                         name = 'секунд'
+                    case 'год':
+                        name = 'лет'
             result.append("{} {}".format(value, name))
-    return ' '.join(result[:granularity])
+
+    match len(result):
+        case 2:
+            return f'{result[0]} и {result[1]}'
+        case 1:
+            return f'{result[0]}'
+
+    return f'{result[0]}, {result[1]} и {result[2]}'
