@@ -78,5 +78,7 @@ pg_ctl -D path/to/initial_db -o "-p 5433" start
 
     python manage.py runserver 8000
 
+### Set up your local gitlab-runner for CI/CD
+
 
 ### to be continuous...
