@@ -15,7 +15,7 @@ variables:
   MYSQL_PASSWORD: $MYSQL_PASS
 
 
-default:
+default:      # Runs before any stage / выполняется перед каждой стадией
   cache:
     key:
       files:
@@ -42,7 +42,7 @@ migrations:
     - postgres:latest
   stage: build
   script:
-    - echo -e "SECRET_KEY = 'not so sectret!'\n" > ./_project_/settings_local.py
+    - echo -e "SECRET_KEY = 'not so sectret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py
     - python3 manage.py makemigrations
     # - python3 manage.py makemigrations myapp
     - python3 manage.py migrate
