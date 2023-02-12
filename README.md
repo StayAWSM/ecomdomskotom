@@ -80,6 +80,49 @@ pg_ctl -D path/to/initial_db -o "-p 5433" start
 
 ### Set up your local gitlab-runner for CI/CD
 
+If you want to start gitlab-runner on your local system - follow [official Docs](https://docs.gitlab.com/runner/install/)
+
+For start gitlab-runner on Docker:
+```
+docker run -d --name gitlab-runner --restart always \
+  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:latest
+```
+```
+docker exec -it gitlab-runner gitlab-runner register
+```
+Then:
+
+> Enter the GitLab instance URL:
+>        
+>     https://gitlab.com/ 
+>Enter the registration token:
+>
+>     GR134894178BYr39yzppfjsasL-Mh
+> Enter a description for the runner:
+> 
+>     <Your_name>-Docker.local
+> 
+> Enter tags for the runner or optional maintenance note for the runner:
+> 
+>     just enter
+
+You should to see info like: `Registering runner... succeeded                     runner=GR1569417865r39y`
+
+> Enter an executor:  
+> 
+>      docker
+> Enter the default Docker image:
+> 
+>      alpine:latest  # or ubuntu:20.04
+
+
+You should to see: 
+
+`Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!`
+
+`Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" `
 
 
 ### to be continuous...
