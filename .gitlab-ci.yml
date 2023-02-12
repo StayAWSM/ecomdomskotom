@@ -32,7 +32,8 @@ build-job:
 lint:
   stage: validate
   script:
-    - prospector --profile-path . --profile .prospector.yaml .
+#    - prospector --profile-path . --profile .prospector.yaml .
+    - prospector
 
 test:
   # This job runs in the test stage.
