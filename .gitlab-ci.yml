@@ -1,4 +1,4 @@
-image: python:3.9-bullseye      # в какой среде будет выполнятся ямл
+image: python:3.9-bullseye      # в какой среде будет выполнятся
 
 stages:          # List of stages for jobs, and their order of execution
   - build
@@ -38,4 +38,5 @@ test:
   # This job runs in the test stage.
   stage: test
   script:
+    - echo -e "SECRET_KEY = 'not so sectret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py
     - pytest
