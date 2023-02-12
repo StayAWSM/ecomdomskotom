@@ -1,4 +1,4 @@
-image: python:3.10-bullseye      # в какой среде будет выполнятся
+image: python:3.10-bullseye      # Choose the image for running / в какой среде будет выполнятся
 
 stages:          # List of stages for jobs, and their order of execution
   - build
@@ -13,7 +13,7 @@ default:      # Runs before any stage / выполняется перед каж
     paths:
       - .venv     # The directory where the commands will be executed / из какой директории будут выполнены команды
   before_script:
-    -  echo -e "SECRET_KEY = 'not so sectret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py
+    - echo -e "SECRET_KEY = 'not so secret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py  #  Set up local_settings
     - python3 -m venv .venv
     - source .venv/bin/activate
     - pip3 install --upgrade pip
@@ -33,7 +33,6 @@ lint:
   stage: validate
   script:
     - prospector --profile-path . --profile .prospector.yaml .
-#    - prospector -X
 
 test:
   # This job runs in the test stage.
