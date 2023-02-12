@@ -1,11 +1,11 @@
 def likes(names):
     """
-    A function that accepts an array of people and returns the corresponding text
-
-    WARNING: Operator match-case works with Python3.10+
+    A function that accepts an array of people
+    and returns the corresponding text
     """
     if not isinstance(names, list):
-        raise TypeError(f'method accepts only List type. You tried to use {type(names)}.')
+        raise TypeError(f'method accepts only List type.'
+                        f' You tried to use {type(names)}.')
 
     match len(names):
         case 0:
@@ -17,5 +17,4 @@ def likes(names):
         case 3:
             return f'{names[0]}, {names[1]} and {names[2]} like this'
         case _:
-            return f'{names[0]}, {names[1]} and {len(names) - 2} others like this'
-
+            return f'{names[0]}, {names[1]} and {len(names) - 2} others like this'  # noqa pylint:disable=line-too-long
