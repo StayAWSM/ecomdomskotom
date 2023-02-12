@@ -38,7 +38,4 @@ test:
   # This job runs in the test stage.
   stage: test
   script:
-    - echo "Running unit tests... This will take about 60 seconds."
     - pytest
-    - echo "Code coverage is 90%"
-
