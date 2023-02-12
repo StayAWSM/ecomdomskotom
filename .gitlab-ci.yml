@@ -1,0 +1,44 @@
+image: python:3.9-bullseye      # в какой среде будет выполнятся ямл
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - validate
+
+default:      # Runs before any stage / выполняется перед каждой стадией
+  cache:
+    key:
+      files:
+        - requirements.txt
+    paths:
+      - .venv     # The directory where the commands will be executed / из какой директории будут выполнены команды
+  before_script:
+    - python3 -m venv .venv
+    - source .venv/bin/activate
+    - pip3 install --upgrade pip
+    - pip3 install --upgrade setuptools
+    - pip3 install -r requirements.txt
+
+build-job:
+  # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - ls && uname -a        # Get info about system
+    - echo -e "SECRET_KEY = 'not so sectret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+    - python3 manage.py check
+
+lint:
+  stage: validate
+  script:
+    - prospector --profile-path . --profile .prospector.yaml .
+
+test:
+  # This job runs in the test stage.
+  stage: test
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - pytest
+    - echo "Code coverage is 90%"
+
