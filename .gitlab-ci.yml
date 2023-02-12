@@ -2,7 +2,7 @@ image: python:3.9-bullseye      # в какой среде будет выпол
 
 stages:          # List of stages for jobs, and their order of execution
   - build
-  - validate
+#  - validate
   - test
 #  - test
 #  - deploy
