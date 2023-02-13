@@ -52,9 +52,9 @@ def format_duration(seconds):
 
     match len(result):
         case 2:
-            return f'{result[0]} и {result[1]}'
+            return f'{result[0]} и {result[1]} назад'
         case 1:
-            return f'{result[0]}'
+            return f'{result[0]} назад'
         case _:
-            return f'{a}, {result[-2]} и {result[-1]}'
+            return f'{a}, {result[-2]} и {result[-1]} назад'
 
