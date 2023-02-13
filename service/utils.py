@@ -33,28 +33,26 @@ def format_duration(seconds):
         (1, ['секунду', 'секунды', 'секунд']))  # one sec
     result = []
 
-    if seconds == 0:
-        return 'Сейчас'
-
-    for count, name in intervals:
+    for count, time_units in intervals:
         value = seconds // count
         if value:
             seconds -= value * count
-            if value == 1:
-                name = name[0]
-            if 4 >= value >= 2:
-                name = name[1]
-            if value >= 5:
-                name = name[2]
-            result.append(f'{value} {name}')
+            if value in [1, 21, 31, 41, 51]:
+                time_units = time_units[0]
+            elif 4 >= value >= 2:
+                time_units = time_units[1]
+            elif value >= 5:
+                time_units = time_units[2]
+            result.append(f'{value} {time_units}')
 
-    a = ', '.join(result[:-2])  # everything except minutes and seconds
+    from_years_to_hours = ', '.join(result[:-2])  # everything except minutes and seconds
 
     match len(result):
-        case 2:
-            return f'{result[0]} и {result[1]} назад'
+        case 0:
+            return 'Сейчас'
         case 1:
             return f'{result[0]} назад'
+        case 2:
+            return f'{result[0]} и {result[1]} назад'
         case _:
-            return f'{a}, {result[-2]} и {result[-1]} назад'
-
+            return f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'

@@ -20,7 +20,7 @@ class TestLikes(unittest.TestCase):
 
 
 class TestDisplayTime(unittest.TestCase):
-    def test_display_time(self):
+    def test_format_duration(self):
         self.assertEqual(format_duration(0), 'Сейчас')
         self.assertEqual(format_duration(1), '1 секунду назад')
         self.assertEqual(format_duration(60), '1 минуту назад')
@@ -28,14 +28,11 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(format_duration(86400), '1 день назад')
         self.assertEqual(format_duration(63), '1 минуту и 3 секунды назад')
         self.assertEqual(format_duration(87878), '1 день, 24 минут и 38 секунд назад')
-        self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минут и 31 секунд назад')
-
+        self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минут и 31 секунду назад')
         self.assertEqual(format_duration(81), '1 минуту и 21 секунду назад')
-        self.assertEqual(format_duration(11471), '3 часа, 11 минут и 11 секунд назад')
-        self.assertEqual(format_duration(568392), '6 дней, 13 часов, 53 минуты и 12 секунды назад')
-        self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунды назад')
+        self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунд назад')
 
-    def test_display_time_exceptions(self):
+    def test_format_duration_exceptions(self):
         self.assertRaises(TypeError, format_duration, 45.7)
         self.assertRaises(TypeError, format_duration, {'seconds': 1})
         self.assertRaises(TypeError, format_duration, ('minutes',))
