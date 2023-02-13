@@ -27,10 +27,10 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(format_duration(3600), '1 час назад')
         self.assertEqual(format_duration(86400), '1 день назад')
         self.assertEqual(format_duration(63), '1 минуту и 3 секунды назад')
-        self.assertEqual(format_duration(87878), '1 день, 24 минут и 38 секунд назад')
-        self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минут и 31 секунду назад')
+        self.assertEqual(format_duration(87878), '1 день, 24 минуты и 38 секунд назад')
+        self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минуты и 31 секунду назад')
         self.assertEqual(format_duration(81), '1 минуту и 21 секунду назад')
-        self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунд назад')
+        self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунды назад')
 
     def test_format_duration_exceptions(self):
         self.assertRaises(TypeError, format_duration, 45.7)

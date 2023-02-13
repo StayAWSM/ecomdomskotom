@@ -39,9 +39,9 @@ def format_duration(seconds):
             seconds -= value * count
             if value in [1, 21, 31, 41, 51]:
                 time_units = time_units[0]
-            elif 4 >= value >= 2:
+            elif 4 >= value >= 2 or (len(str(value)) == 2 and int(str(value)[-1]) in [2, 3, 4] and value not in [12, 13, 14]):
                 time_units = time_units[1]
-            elif value >= 5:
+            else:
                 time_units = time_units[2]
             result.append(f'{value} {time_units}')
 
