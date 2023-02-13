@@ -1,0 +1,59 @@
+test-warnings: true
+strictness: veryhigh
+
+ignore-paths:
+  - docs
+  - migrations
+  - templates
+  - .venv
+  - _project_/settings_local.py
+  - _project_/settings.py
+  - _project_/celery_config.py
+  - README.md
+  - lib
+  - service/migrations
+
+pylint:
+#  options:
+#    jobs: 8
+  disable:
+    - unused-argument
+    - too-few-public-methods
+    - too-many-ancestors
+    - redefined-outer-name
+    - relative-beyond-top-level
+    - abstract-method
+    - no-self-use
+    - no-value-for-parameter
+    - attribute-defined-outside-init
+    - unnecessary-comprehension
+    - unnecessary-lambda
+    - protected-access
+    - f-string-without-interpolation
+    - too-many-public-methods
+    - inconsistent-return-statements
+    - unnecessary-pass
+    - invalid-str-returned
+    - logging-fstring-interpolation
+    - no-else-return
+    - import-outside-toplevel
+    - logging-not-lazy
+    - too-many-instance-attributes
+    - too-many-locals
+    - unsubscriptable-object
+    - too-many-lines
+    - superfluous-parens
+    - too-many-arguments
+    - arguments-differ
+    - invalid-envvar-default
+    - not-an-iterable
+    - super-init-not-called
+    - wrong-import-order
+
+pep8:
+  disable:
+    - W605
+
+pyflakes:
+  disable:
+    - F541

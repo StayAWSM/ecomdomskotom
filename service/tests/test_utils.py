@@ -8,8 +8,10 @@ class TestLikes(unittest.TestCase):
         self.assertEqual(likes([]), 'No one likes this')
         self.assertEqual(likes(['Bob']), 'Bob likes this')
         self.assertEqual(likes(['Alex', 'Bob']), 'Alex and Bob like this')
-        self.assertEqual(likes(['Artur', 'Bob', 'John']), 'Artur, Bob and John like this')
-        self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']), 'Artur, Bob and 2 others like this')
+        self.assertEqual(likes(['Artur', 'Bob', 'John']),
+                         'Artur, Bob and John like this')
+        self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']),
+                         'Artur, Bob and 2 others like this')
 
     def test_likes_exceptions(self):
         self.assertRaises(TypeError, likes, 1)
