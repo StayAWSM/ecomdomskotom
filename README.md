@@ -89,6 +89,7 @@ docker run -d --name gitlab-runner --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
   gitlab/gitlab-runner:latest
 ```
+_For MacOs use `/Users/Shared` instead of `srv`_ 
 ```
 docker exec -it gitlab-runner gitlab-runner register
 ```
@@ -123,6 +124,18 @@ You should to see:
 `Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!`
 
 `Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" `
+
+### For local machine validate project
+_Recommended to do this before every creating every commit_
+
+For **lint, pep** and etc use:
+```commandline
+prospector
+```
+For **run tests**:
+```commandline
+pytest 
+```
 
 
 ### to be continuous...
