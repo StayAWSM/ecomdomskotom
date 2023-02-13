@@ -1,5 +1,5 @@
 import unittest
-from service.utils import likes, time_online
+from service.utils import likes, format_duration
 
 
 class TestLikes(unittest.TestCase):
@@ -21,19 +21,20 @@ class TestLikes(unittest.TestCase):
 
 class TestDisplayTime(unittest.TestCase):
     def test_display_time(self):
-        self.assertEqual(time_online(60), '1 минута')
-        self.assertEqual(time_online(3600), '1 час')
-        self.assertEqual(time_online(86400), '1 день')
-        self.assertEqual(time_online(604800), '1 неделя')
-        self.assertEqual(time_online(2592000), '1 месяц')
-        self.assertEqual(time_online(31536000), '1 год')
-        self.assertEqual(time_online(63), '1 минута и 3 секунды')
-        self.assertEqual(time_online(87878), '1 день, 24 минут и 38 секунд')
-        self.assertEqual(time_online(315365611), '10 лет, 1 час, 33 минут и 31 секунд')
-        self.assertEqual(time_online(0), 'Сейчас')
+        self.assertEqual(format_duration(1), '1 секунду')
+        self.assertEqual(format_duration(60), '1 минуту')
+        self.assertEqual(format_duration(3600), '1 час')
+        self.assertEqual(format_duration(86400), '1 день')
+        self.assertEqual(format_duration(604800), '1 неделю')
+        self.assertEqual(format_duration(2592000), '1 месяц')
+        self.assertEqual(format_duration(31536000), '1 год')
+        self.assertEqual(format_duration(63), '1 минуту и 3 секунды')
+        self.assertEqual(format_duration(87878), '1 день, 24 минут и 38 секунд')
+        self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минут и 31 секунд')
+        self.assertEqual(format_duration(0), 'Сейчас')
 
     def test_display_time_exceptions(self):
-        self.assertRaises(TypeError, time_online, 45.7)
-        self.assertRaises(TypeError, time_online, {'seconds': 1})
-        self.assertRaises(TypeError, time_online, ('minutes',))
-        self.assertRaises(TypeError, time_online, {'1', '2', '3'})
+        self.assertRaises(TypeError, format_duration, 45.7)
+        self.assertRaises(TypeError, format_duration, {'seconds': 1})
+        self.assertRaises(TypeError, format_duration, ('minutes',))
+        self.assertRaises(TypeError, format_duration, {'1', '2', '3'})
