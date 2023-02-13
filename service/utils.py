@@ -46,7 +46,7 @@ def format_duration(seconds):
                 name = name[1]
             if value >= 5:
                 name = name[2]
-            result.append("{} {}".format(value, name))
+            result.append(f'{value} {name}')
 
     a = ', '.join(result[:-2])  # everything except minutes and seconds
 
