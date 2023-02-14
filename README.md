@@ -45,12 +45,12 @@ DEBUG = True
 SECRET_KEY = '0n-w7wsf^3-ehi^!@m2fayppf55ecodomskotom55^l7k'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',  # for Windows django.db.backends.postgresql_psycopg2
-        'NAME': '<project-name>',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',  
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',  # for Windows 127.0.0.1
-        'PORT': '5432'
+        'HOST': 'localhost',  # for you can Windows 127.0.0.1
+        'PORT': '5436'
     }
 }
 ALLOWED_HOSTS = ['*']
@@ -58,8 +58,30 @@ ALLOWED_HOSTS = ['*']
 * and change setting for your dev DB 
 
 ### If your default(5432) port already use:
-Create/init new instance by `pg_ctl`
+Create file `docker-compose-dev.yml` and set up:
+```yaml
+version: "3.0"
+services:
+  db:
+    container_name: "db"
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5436:5432"
+    networks:
+      - custom
 
+networks:
+    custom:
+      driver: bridge
+```
+
+
+Or create/init new instance by `pg_ctl`
 ```
 initdb -D path/to/initial_db
 ```
