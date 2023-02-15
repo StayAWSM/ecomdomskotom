@@ -10,6 +10,7 @@ venv/
 # Dev settings
 *.dev
 .env.dev
+docker-compose-dev.yml
 
 # Local settings
 _project_/settings_local.py

@@ -3,6 +3,9 @@ Django==3.2.6
 psycopg2-binary==2.9.1
 psycopg2==2.9.5
 
+# Models
+django-simple-history==3.2.0
+
 # Test
 pytest==7.2.1
 pytest-django==4.5.2

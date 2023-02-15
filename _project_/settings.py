@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'service.apps.ServiceConfig',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -27,6 +28,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = '_project_.urls'
@@ -85,9 +87,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
