@@ -55,7 +55,7 @@ class Versioned(models.Model):
         :return: is the object updated
         :rtype: bool
         """
-        # more detail here: https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2  # noqa
+        # more detail here: https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2  # noqa pylint:disable=line-too-long
         kwargs['version'] = self.version + 1
         model = type(self)
         updated = model.objects.filter(pk=self.pk, version=self.version) \
