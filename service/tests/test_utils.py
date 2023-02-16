@@ -9,9 +9,11 @@ class TestLikes(unittest.TestCase):
         self.assertEqual(likes(['Bob'], lang='en'), 'Bob likes this')
         self.assertEqual(likes(['Alex', 'Bob'], lang='en'), 'Alex and Bob like this')
         self.assertEqual(likes(['Artur', 'Bob', 'John']),
-                         'Artur, Bob и John нравится это')
+                         'Артуру, Бобу и Джону нравится это')
         self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']),
-                         'Artur, Bob и 2 другим нравится это')
+                         'Artur, Bob и еще 2 людям нравится это')
+        self.assertEqual(likes(['Максим', 'Егор'], lang='en'),
+                         'Максим and Егор like this')
 
     def test_likes_exceptions(self):
         self.assertRaises(TypeError, likes, 1)

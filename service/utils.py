@@ -10,30 +10,29 @@ def likes(names, lang='ru'):
         raise TypeError(f'method accepts only List type.'
                         f' You tried to use {type(names)}.')
 
-    if lang == 'en':
-        match len(names):
-            case 0:
-                return 'No one likes this'
-            case 1:
-                return f'{names[0]} likes this'
-            case 2:
-                return f'{names[0]} and {names[1]} like this'
-            case 3:
-                return f'{names[0]}, {names[1]} and {names[2]} like this'
-            case _:
-                return f'{names[0]}, {names[1]} and {len(names) - 2} others like this'  # noqa pylint:disable=line-too-long
-    else:
-        match len(names):
-            case 0:
-                return f'Никому не нравится это'
-            case 1:
-                return f'{names[0]} нравится это'
-            case 2:
-                return f'{names[0]} и {names[1]} нравится это'
-            case 3:
-                return f'{names[0]}, {names[1]} и {names[2]} нравится это'
-            case _:
-                return f'{names[0]}, {names[1]} и {len(names) - 2} другим нравится это'  # noqa pylint:disable=line-too-long
+    translator = Translator(from_lang='en', to_lang='ru')
+
+    text1 = lambda text: 'No one likes this' if lang == 'en' else translator.translate('No one likes this')
+    text2 = lambda text: f'{names[0]} likes this' if lang == 'en' else translator.translate(f'{names[0]} likes this')
+    text3 = lambda text: f'{names[0]} and {names[1]} like this' if lang == 'en' else translator.translate(
+        f'{names[0]} and {names[1]} like this')
+    text4 = lambda text: f'{names[0]}, {names[1]} and {names[2]} like this' if lang == 'en' else translator.translate(
+        f'{names[0]}, {names[1]} and {names[2]} like this')
+    text5 = lambda \
+        text: f'{names[0]}, {names[1]} and {len(names) - 2} others like this' if lang == 'en' else translator.translate(
+            f'{names[0]}, {names[1]} and {len(names) - 2} others like this')
+
+    match len(names):
+        case 0:
+            return text1(lang)
+        case 1:
+            return text2(lang)
+        case 2:
+            return text3(lang)
+        case 3:
+            return text4(lang)
+        case _:
+            return text5(lang)  # noqa pylint:disable=line-too-long
 
 
 def _match_declensions(num):
