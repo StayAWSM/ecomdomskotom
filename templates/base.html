@@ -10,6 +10,14 @@
     <title>ecodomskotom</title>
 
     {% block styles %}
+
+        {% block bootstap_style %}
+            {% comment %}
+            {% include 'inc/_bootsrap_style.html' %}
+            {% endcomment %}
+
+        {% endblock %}
+
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!-- CSS ============================================= -->
         <link rel="stylesheet" href="{% static "css/linearicons.css" %}">
@@ -35,7 +43,12 @@
     {% include 'inc/_image_carusel.html' %}
 {% endblock %}
 
+
 {% block additional %}
+
+    {% comment %}
+    {% include 'inc/_time_wrapper_boots.html' %}
+    {% endcomment %}
 
     {% include 'inc/_call_to.html' %}
 
