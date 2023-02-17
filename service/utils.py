@@ -26,7 +26,8 @@ def likes(names, lang='ru'):
 
 
 def _match_declensions(num):
-    last_digit = int(str(num)[-1])  # берем последнюю цифру, так как от неё зависит склонение слова  # noqa pylint:disable=line-too-long
+    # берем последнюю цифру, так как от неё зависит склонение слова
+    last_digit = int(str(num)[-1])
     if last_digit == 1 and num != 11:
         return 0  # склонение для единички и исключения в виде 11
     if (2 <= last_digit <= 4) and not (12 <= num <= 14):
@@ -40,13 +41,13 @@ def format_duration(seconds, lang='ru'):
                         f' You tried to use {type(seconds)}.')
 
     intervals = (
-        (31536000, ['год', 'года', 'лет', 'year', 'years']),  # 60 * 60 * 24 * 365  # noqa pylint:disable=line-too-long
-        (2592000, ['месяц', 'месяца', 'месяцев', 'month', 'months']),  # 60 * 60 * 24 * 30  # noqa pylint:disable=line-too-long
-        (604800, ['неделю', 'недели', 'недель', 'week', 'weeks']),  # 60 * 60 * 24 * 7  # noqa pylint:disable=line-too-long
-        (86400, ['день', 'дня', 'дней', 'day', 'days']),  # 60 * 60 * 24
-        (3600, ['час', 'часа', 'часов', 'hour', 'hours']),  # 60 * 60
-        (60, ['минуту', 'минуты', 'минут', 'minute', 'minutes']),  # 60 sec
-        (1, ['секунду', 'секунды', 'секунд', 'second', 'seconds']))  # one sec
+        (31536000, ['год', 'года', 'лет', 'year', 'years']),
+        (2592000, ['месяц', 'месяца', 'месяцев', 'month', 'months']),
+        (604800, ['неделю', 'недели', 'недель', 'week', 'weeks']),
+        (86400, ['день', 'дня', 'дней', 'day', 'days']),
+        (3600, ['час', 'часа', 'часов', 'hour', 'hours']),
+        (60, ['минуту', 'минуты', 'минут', 'minute', 'minutes']),
+        (1, ['секунду', 'секунды', 'секунд', 'second', 'seconds']))
     result = []
 
     for count, declensions in intervals:
@@ -58,13 +59,15 @@ def format_duration(seconds, lang='ru'):
             result.append(f'{value} {declensions[-1 if value > 1 else -2]}')
             seconds -= value * count
 
-    from_years_to_hours = ', '.join(result[:-2])  # everything except minutes and seconds  # noqa pylint:disable=line-too-long
+    # everything except minutes and seconds
+    from_years_to_hours = ', '.join(result[:-2])
 
     match len(result):
         case 0:
             return 'Now' if lang == 'en' else 'Сейчас'
         case 1:
-            return f'{result[0]} ago' if lang == 'en' else f'{result[0]} назад'  # noqa pylint:disable=line-too-long
+            return f'{result[0]} ago' if lang == 'en' \
+                else f'{result[0]} назад'
         case 2:
             return f'{result[0]} and {result[1]} ago' \
                 if lang == 'en' else f'{result[0]} и {result[1]} назад'
