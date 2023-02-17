@@ -82,7 +82,7 @@ def format_duration(seconds, lang='ru'):
     else:
         match len(result):
             case 0:
-                return 'Сейчас'
+                return 'Сейчас'   # 123
             case 1:
                 return f'{result[0]} назад'
             case 2:
