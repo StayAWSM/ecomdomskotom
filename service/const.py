@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-TABLES_NUMBER = [
+TABLE_NUMBERS = [
     (1, _('Стол №1')),
     (2, _('Стол №2')),
     (3, _('Стол №3')),

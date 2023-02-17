@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from core.models import BaseHistorical
-from .const import TABLES_NUMBER
+from .const import TABLE_NUMBERS
 
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -73,15 +73,15 @@ class Booking(BaseHistorical):
         blank=False,
         null=False
     )
-    tables_number = models.SmallIntegerField(
+    table_number = models.SmallIntegerField(
         verbose_name=_('Номер стола'),
-        choices=TABLES_NUMBER,
+        choices=TABLE_NUMBERS,
         blank=False,
         null=False
     )
 
     def __str__(self):
-        return f'{self.name}/{self.date}/{self.time_from}/{self.tables_number}'
+        return f'{self.name}/{self.date}/{self.time_from}/{self.table_number}'
 
     class Meta:
         verbose_name = _('Бронирование')
