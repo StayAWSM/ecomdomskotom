@@ -1,6 +1,3 @@
-from translate import Translator
-
-
 def likes(names, lang='ru'):
     """
     A function that accepts an array of people
@@ -9,30 +6,20 @@ def likes(names, lang='ru'):
     if not isinstance(names, list):
         raise TypeError(f'method accepts only List type.'
                         f' You tried to use {type(names)}.')
-
-    translator = Translator(from_lang='en', to_lang='ru')
-
-    text1 = lambda text: 'No one likes this' if lang == 'en' else translator.translate('No one likes this')
-    text2 = lambda text: f'{names[0]} likes this' if lang == 'en' else translator.translate(f'{names[0]} likes this')
-    text3 = lambda text: f'{names[0]} and {names[1]} like this' if lang == 'en' else translator.translate(
-        f'{names[0]} and {names[1]} like this')
-    text4 = lambda text: f'{names[0]}, {names[1]} and {names[2]} like this' if lang == 'en' else translator.translate(
-        f'{names[0]}, {names[1]} and {names[2]} like this')
-    text5 = lambda \
-        text: f'{names[0]}, {names[1]} and {len(names) - 2} others like this' if lang == 'en' else translator.translate(
-            f'{names[0]}, {names[1]} and {len(names) - 2} others like this')
-
     match len(names):
         case 0:
-            return text1(lang)
+            return 'No one likes this' if lang == 'en' else 'Никому это не нравится'
         case 1:
-            return text2(lang)
+            return f'{names[0]} likes this' if lang == 'en' else f'{names[0]} оценил(а) это'
         case 2:
-            return text3(lang)
+            return f'{names[0]} and {names[1]} likes this' if lang == 'en' else \
+                f'{names[0]} и {names[1]} оценили это'
         case 3:
-            return text4(lang)
+            return f'{names[0]}, {names[1]} and {names[2]} likes this' if lang == 'en' else \
+                f'{names[0]}, {names[1]} и {names[2]} оценили это'
         case _:
-            return text5(lang)  # noqa pylint:disable=line-too-long
+            return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this' if lang == 'en' else \
+                f'{names[0]}, {names[1]} и {len(names) - 2} других оценили это'  # noqa pylint:disable=line-too-long
 
 
 def _match_declensions(num):
@@ -49,43 +36,34 @@ def format_duration(seconds, lang='ru'):
         raise TypeError(f'method accepts only Int type.'
                         f' You tried to use {type(seconds)}.')
 
-    translator = Translator(from_lang='ru', to_lang='en')
-
     intervals = (
-        (31536000, ['год', 'года', 'лет']),  # 60 * 60 * 24 * 365
-        (2592000, ['месяц', 'месяца', 'месяцев']),  # 60 * 60 * 24 * 30
-        (604800, ['неделю', 'недели', 'недель']),  # 60 * 60 * 24 * 7
-        (86400, ['день', 'дня', 'дней']),  # 60 * 60 * 24
-        (3600, ['час', 'часа', 'часов']),  # 60 * 60
-        (60, ['минуту', 'минуты', 'минут']),  # 60 sec
-        (1, ['секунду', 'секунды', 'секунд']))  # one sec
+        (31536000, ['год', 'года', 'лет', 'year', 'years']),  # 60 * 60 * 24 * 365
+        (2592000, ['месяц', 'месяца', 'месяцев', 'month', 'months']),  # 60 * 60 * 24 * 30
+        (604800, ['неделю', 'недели', 'недель', 'week', 'weeks']),  # 60 * 60 * 24 * 7
+        (86400, ['день', 'дня', 'дней', 'day', 'days']),  # 60 * 60 * 24
+        (3600, ['час', 'часа', 'часов', 'hour', 'hours']),  # 60 * 60
+        (60, ['минуту', 'минуты', 'минут', 'minute', 'minutes']),  # 60 sec
+        (1, ['секунду', 'секунды', 'секунд', 'second', 'seconds']))  # one sec
     result = []
 
     for count, declensions in intervals:
         value = seconds // count
-        if value:
+        if value and lang == 'ru':
             result.append(f'{value} {declensions[_match_declensions(value)]}')
+            seconds -= value * count
+        elif value and lang == 'en':
+            result.append(f'{value} {declensions[-1 if value > 1 else -2]}')
             seconds -= value * count
 
     from_years_to_hours = ', '.join(result[:-2])  # everything except minutes and seconds
 
-    if lang == 'en':
-        match len(result):
-            case 0:
-                return translator.translate('Сейчас')
-            case 1:
-                return translator.translate(f'{result[0]} назад')
-            case 2:
-                return translator.translate(f'{result[0]} и {result[1]} назад')
-            case _:
-                return translator.translate(f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад')
-    else:
-        match len(result):
-            case 0:
-                return 'Сейчас'   # 123
-            case 1:
-                return f'{result[0]} назад'
-            case 2:
-                return f'{result[0]} и {result[1]} назад'
-            case _:
-                return f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'  # Коментарий
+    match len(result):
+        case 0:
+            return 'Now' if lang == 'en' else 'Сейчас'
+        case 1:
+            return f'{result[0]} ago' if lang == 'en' else f'{result[0]} назад'
+        case 2:
+            return f'{result[0]} and {result[1]} ago' if lang == 'en' else f'{result[0]} и {result[1]} назад'
+        case _:
+            return f'{from_years_to_hours}, {result[-2]} and {result[-1]} ago'if lang == 'en' else \
+                   f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'

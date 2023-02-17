@@ -7,13 +7,12 @@ class TestLikes(unittest.TestCase):
     def test_likes(self):
         self.assertEqual(likes([], lang='en'), 'No one likes this')
         self.assertEqual(likes(['Bob'], lang='en'), 'Bob likes this')
-        self.assertEqual(likes(['Alex', 'Bob'], lang='en'), 'Alex and Bob like this')
-        self.assertEqual(likes(['Artur', 'Bob', 'John']),
-                         'Артуру, Бобу и Джону нравится это')
-        self.assertEqual(likes(['Artur', 'Bob', 'John', 'Liza']),
-                         'Artur, Bob и еще 2 людям нравится это')
-        self.assertEqual(likes(['Максим', 'Егор'], lang='en'),
-                         'Максим and Егор like this')
+        self.assertEqual(likes(['Максим', 'Ольга']), 'Максим и Ольга оценили это')
+        self.assertEqual(likes(['Максим', 'Ольга', 'John']), 'Максим, Ольга и John оценили это')
+        self.assertEqual(likes(['Максим', 'Ольга', 'Никита', 'Alex'], lang='en'),
+                         'Максим, Ольга and 2 others likes this')
+        self.assertEqual(likes(['Artur', 'Bob', 'Richard'], lang='en'),
+                         'Artur, Bob and Richard likes this')
 
     def test_likes_exceptions(self):
         self.assertRaises(TypeError, likes, 1)
@@ -35,6 +34,14 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(format_duration(315365611), '10 лет, 1 час, 33 минуты и 31 секунду назад')  # noqa pylint:disable=line-too-long
         self.assertEqual(format_duration(81), '1 минуту и 21 секунду назад')
         self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунды назад')  # noqa pylint:disable=line-too-long
+
+        self.assertEqual(format_duration(60, lang='en'), '1 minute ago')
+        self.assertEqual(format_duration(3600, lang='en'), '1 hour ago')
+        self.assertEqual(format_duration(87878, lang='en'),
+                         '1 day, 24 minutes and 38 seconds ago')
+        self.assertEqual(format_duration(315365611, lang='en'),
+                         '10 years, 1 hour, 33 minutes and 31 seconds ago')
+        self.assertEqual(format_duration(81, lang='en'), '1 minute and 21 seconds ago')
 
     def test_format_duration_exceptions(self):
         self.assertRaises(TypeError, format_duration, 45.7)
