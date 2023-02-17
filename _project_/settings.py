@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'service.apps.ServiceConfig',
     'simple_history',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
