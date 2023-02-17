@@ -5,6 +5,8 @@ psycopg2==2.9.5
 
 # Models
 django-simple-history==3.2.0
+django-phonenumber-field==7.0.2
+phonenumbers==8.13.6
 
 # Test
 pytest==7.2.1
