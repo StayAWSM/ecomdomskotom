@@ -19,13 +19,14 @@ def likes(names, lang='ru'):
                 if lang == 'en' else \
                 f'{names[0]}, {names[1]} и {names[2]} оценили это'
         case _:
-            return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this' \
+            return f'{names[0]}, {names[1]} and {len(names) - 2} ' \
+                   f'others likes this' \
                 if lang == 'en' else \
                 f'{names[0]}, {names[1]} и {len(names) - 2} других оценили это'  # noqa pylint:disable=line-too-long
 
 
 def _match_declensions(num):
-    last_digit = int(str(num)[-1])  # берем последнюю цифру, так как от неё зависит склонение слова
+    last_digit = int(str(num)[-1])  # берем последнюю цифру, так как от неё зависит склонение слова  # noqa pylint:disable=line-too-long
     if last_digit == 1 and num != 11:
         return 0  # склонение для единички и исключения в виде 11
     if (2 <= last_digit <= 4) and not (12 <= num <= 14):
@@ -39,9 +40,9 @@ def format_duration(seconds, lang='ru'):
                         f' You tried to use {type(seconds)}.')
 
     intervals = (
-        (31536000, ['год', 'года', 'лет', 'year', 'years']),  # 60 * 60 * 24 * 365
-        (2592000, ['месяц', 'месяца', 'месяцев', 'month', 'months']),  # 60 * 60 * 24 * 30
-        (604800, ['неделю', 'недели', 'недель', 'week', 'weeks']),  # 60 * 60 * 24 * 7
+        (31536000, ['год', 'года', 'лет', 'year', 'years']),  # 60 * 60 * 24 * 365  # noqa pylint:disable=line-too-long
+        (2592000, ['месяц', 'месяца', 'месяцев', 'month', 'months']),  # 60 * 60 * 24 * 30  # noqa pylint:disable=line-too-long
+        (604800, ['неделю', 'недели', 'недель', 'week', 'weeks']),  # 60 * 60 * 24 * 7  # noqa pylint:disable=line-too-long
         (86400, ['день', 'дня', 'дней', 'day', 'days']),  # 60 * 60 * 24
         (3600, ['час', 'часа', 'часов', 'hour', 'hours']),  # 60 * 60
         (60, ['минуту', 'минуты', 'минут', 'minute', 'minutes']),  # 60 sec
@@ -57,15 +58,18 @@ def format_duration(seconds, lang='ru'):
             result.append(f'{value} {declensions[-1 if value > 1 else -2]}')
             seconds -= value * count
 
-    from_years_to_hours = ', '.join(result[:-2])  # everything except minutes and seconds
+    from_years_to_hours = ', '.join(result[:-2])  # everything except minutes and seconds  # noqa pylint:disable=line-too-long
 
     match len(result):
         case 0:
             return 'Now' if lang == 'en' else 'Сейчас'
         case 1:
-            return f'{result[0]} ago' if lang == 'en' else f'{result[0]} назад'
+            return f'{result[0]} ago' if lang == 'en' else f'{result[0]} назад'  # noqa pylint:disable=line-too-long
         case 2:
-            return f'{result[0]} and {result[1]} ago' if lang == 'en' else f'{result[0]} и {result[1]} назад'
+            return f'{result[0]} and {result[1]} ago' \
+                if lang == 'en' else f'{result[0]} и {result[1]} назад'
         case _:
-            return f'{from_years_to_hours}, {result[-2]} and {result[-1]} ago'if lang == 'en' else \
+            return f'{from_years_to_hours}, {result[-2]} and ' \
+                   f'{result[-1]} ago'\
+                if lang == 'en' else \
                    f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'
