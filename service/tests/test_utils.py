@@ -7,9 +7,9 @@ class TestLikes(unittest.TestCase):
     def test_likes(self):
         self.assertEqual(likes([], lang='en'), 'No one likes this')
         self.assertEqual(likes(['Bob'], lang='en'), 'Bob likes this')
-        self.assertEqual(likes(['Максим', 'Ольга']), 'Максим и Ольга оценили это')
-        self.assertEqual(likes(['Максим', 'Ольга', 'John']), 'Максим, Ольга и John оценили это')
-        self.assertEqual(likes(['Максим', 'Ольга', 'Никита', 'Alex'], lang='en'),
+        self.assertEqual(likes(['Максим', 'Ольга']), 'Максим и Ольга оценили это')  # noqa pylint:disable=line-too-long
+        self.assertEqual(likes(['Максим', 'Ольга', 'John']), 'Максим, Ольга и John оценили это')  # noqa pylint:disable=line-too-long
+        self.assertEqual(likes(['Максим', 'Ольга', 'Никита', 'Alex'], lang='en'),  # noqa pylint:disable=line-too-long
                          'Максим, Ольга and 2 others likes this')
         self.assertEqual(likes(['Artur', 'Bob', 'Richard'], lang='en'),
                          'Artur, Bob and Richard likes this')
@@ -41,7 +41,7 @@ class TestDisplayTime(unittest.TestCase):
                          '1 day, 24 minutes and 38 seconds ago')
         self.assertEqual(format_duration(315365611, lang='en'),
                          '10 years, 1 hour, 33 minutes and 31 seconds ago')
-        self.assertEqual(format_duration(81, lang='en'), '1 minute and 21 seconds ago')
+        self.assertEqual(format_duration(81, lang='en'), '1 minute and 21 seconds ago')  # noqa pylint:disable=line-too-long
 
     def test_format_duration_exceptions(self):
         self.assertRaises(TypeError, format_duration, 45.7)

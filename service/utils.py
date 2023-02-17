@@ -8,17 +8,19 @@ def likes(names, lang='ru'):
                         f' You tried to use {type(names)}.')
     match len(names):
         case 0:
-            return 'No one likes this' if lang == 'en' else 'Никому это не нравится'
+            return 'No one likes this' if lang == 'en' else 'Никому это не нравится'  # noqa pylint:disable=line-too-long
         case 1:
-            return f'{names[0]} likes this' if lang == 'en' else f'{names[0]} оценил(а) это'
+            return f'{names[0]} likes this' if lang == 'en' else f'{names[0]} оценил(а) это'  # noqa pylint:disable=line-too-long
         case 2:
-            return f'{names[0]} and {names[1]} likes this' if lang == 'en' else \
-                f'{names[0]} и {names[1]} оценили это'
+            return f'{names[0]} and {names[1]} likes this' if lang == 'en' \
+                else f'{names[0]} и {names[1]} оценили это'
         case 3:
-            return f'{names[0]}, {names[1]} and {names[2]} likes this' if lang == 'en' else \
+            return f'{names[0]}, {names[1]} and {names[2]} likes this' \
+                if lang == 'en' else \
                 f'{names[0]}, {names[1]} и {names[2]} оценили это'
         case _:
-            return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this' if lang == 'en' else \
+            return f'{names[0]}, {names[1]} and {len(names) - 2} others likes this' \
+                if lang == 'en' else \
                 f'{names[0]}, {names[1]} и {len(names) - 2} других оценили это'  # noqa pylint:disable=line-too-long
 
 
