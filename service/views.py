@@ -6,7 +6,6 @@ from .forms import ContactForm
 from .models import Contact
 
 
-
 class ContactCreate(CreateView):
     model = Contact
     # fields = ['name', 'email', 'message']
