@@ -20,9 +20,10 @@ def likes(names, lang='ru'):
                 f'{names[0]}, {names[1]} и {names[2]} оценили это'
         case _:
             return f'{names[0]}, {names[1]} and {len(names) - 2} ' \
-                   f'others likes this' \
+                f'others likes this' \
                 if lang == 'en' else \
-                f'{names[0]}, {names[1]} и {len(names) - 2} других оценили это'  # noqa pylint:disable=line-too-long
+                f'{names[0]}, {names[1]} и {len(names) - 2} ' \
+                f'других оценили это'
 
 
 def _match_declensions(num):
