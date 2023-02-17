@@ -1,2 +1,58 @@
+# Main
 Django==3.2.6
 psycopg2-binary==2.9.1
+psycopg2==2.9.5
+
+# Models
+django-simple-history==3.2.0
+django-phonenumber-field==7.0.2
+phonenumbers==8.13.6
+
+# Test
+pytest==7.2.1
+pytest-django==4.5.2
+
+# For lint
+prospector==1.8.4
+flake8==5.0.4
+flake8-polyfill==1.0.2
+pycodestyle==2.9.1
+pydocstyle==6.3.0
+pyflakes==2.5.0
+pylint==2.15.10
+pylint-celery==0.3
+pylint-django==2.5.3
+pylint-flask==0.6
+pylint-plugin-utils==0.7
+packaging==21.3
+pep8-naming==0.10.0
+platformdirs==2.6.2
+
+# Other depending
+asgiref==3.6.0
+astroid==2.13.3
+attrs==22.2.0
+dill==0.3.6
+dodgy==0.2.1
+exceptiongroup==1.1.0
+gitdb==4.0.10
+GitPython==3.1.30
+iniconfig==2.0.0
+isort==5.12.0
+lazy-object-proxy==1.9.0
+mccabe==0.7.0
+pluggy==1.0.0
+poetry-semver==0.1.0
+pyparsing==3.0.9
+pytz==2022.7.1
+PyYAML==6.0
+requirements-detector==1.0.3
+setoptconf-tmp==0.3.1
+smmap==5.0.0
+snowballstemmer==2.2.0
+sqlparse==0.4.3
+toml==0.10.2
+tomli==2.0.1
+tomlkit==0.11.6
+typing_extensions==4.4.0
+wrapt==1.14.1

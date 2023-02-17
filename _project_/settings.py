@@ -17,6 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'service.apps.ServiceConfig',
+    'simple_history',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -27,6 +29,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = '_project_.urls'
@@ -62,16 +65,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
@@ -85,14 +88,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 try:
-    from .settings_local import *  # noqa: pylint=unused-wildcard-import
+    from .settings_local import *  # noqa
 except ImportError:
     pass
