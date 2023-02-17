@@ -88,4 +88,4 @@ def format_duration(seconds, lang='ru'):
             case 2:
                 return f'{result[0]} и {result[1]} назад'
             case _:
-                return f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'
+                return f'{from_years_to_hours}, {result[-2]} и {result[-1]} назад'  # Коментарий
