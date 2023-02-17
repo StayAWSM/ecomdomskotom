@@ -45,12 +45,12 @@ DEBUG = True
 SECRET_KEY = '0n-w7wsf^3-ehi^!@m2fayppf55ecodomskotom55^l7k'
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  
-        'NAME': 'postgres',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': '<project-name>',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',  # for you can Windows 127.0.0.1
-        'PORT': '5436'
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 ALLOWED_HOSTS = ['*']
@@ -58,30 +58,8 @@ ALLOWED_HOSTS = ['*']
 * and change setting for your dev DB 
 
 ### If your default(5432) port already use:
-Create file `docker-compose-dev.yml` and set up:
-```yaml
-version: "3.0"
-services:
-  db:
-    container_name: "db"
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - "5436:5432"
-    networks:
-      - custom
+Create/init new instance by `pg_ctl`
 
-networks:
-    custom:
-      driver: bridge
-```
-
-
-Or create/init new instance by `pg_ctl`
 ```
 initdb -D path/to/initial_db
 ```
@@ -99,65 +77,6 @@ pg_ctl -D path/to/initial_db -o "-p 5433" start
 ### Run dev server:
 
     python manage.py runserver 8000
-
-### Set up your local gitlab-runner for CI/CD
-
-If you want to start gitlab-runner on your local system - follow [official Docs](https://docs.gitlab.com/runner/install/)
-
-For start gitlab-runner on Docker:
-```
-docker run -d --name gitlab-runner --restart always \
-  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:latest
-```
-_For MacOs use `/Users/Shared` instead of `srv`_ 
-```
-docker exec -it gitlab-runner gitlab-runner register
-```
-Then:
-
-> Enter the GitLab instance URL:
->        
->     https://gitlab.com/ 
->Enter the registration token:
->
->     GR134894178BYr39yzppfjsasL-Mh
-> Enter a description for the runner:
-> 
->     <Your_name>-Docker.local
-> 
-> Enter tags for the runner or optional maintenance note for the runner:
-> 
->     just enter
-
-You should to see info like: `Registering runner... succeeded                     runner=GR1569417865r39y`
-
-> Enter an executor:  
-> 
->      docker
-> Enter the default Docker image:
-> 
->      alpine:latest  # or ubuntu:20.04
-
-
-You should to see: 
-
-`Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!`
-
-`Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" `
-
-### For local machine validate project
-_Recommended to do this before every creating every commit_
-
-For **lint, pep** and etc use:
-```commandline
-prospector
-```
-For **run tests**:
-```commandline
-pytest 
-```
 
 
 ### to be continuous...
