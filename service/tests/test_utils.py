@@ -23,7 +23,10 @@ class TestLikes(unittest.TestCase):
 
 
 class TestDisplayTime(unittest.TestCase):
+    """A simple method showing user activity"""
+
     def test_format_duration(self):
+        # for ru lang
         self.assertEqual(format_duration(0), 'Сейчас')
         self.assertEqual(format_duration(1), '1 секунду назад')
         self.assertEqual(format_duration(60), '1 минуту назад')
@@ -35,6 +38,9 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(format_duration(81), '1 минуту и 21 секунду назад')
         self.assertEqual(format_duration(736302), '1 неделю, 1 день, 12 часов, 31 минуту и 42 секунды назад')  # noqa pylint:disable=line-too-long
 
+        # for en lang
+        self.assertEqual(format_duration(0, lang='en'), 'Now')
+        self.assertEqual(format_duration(1, lang='en'), '1 second ago')
         self.assertEqual(format_duration(60, lang='en'), '1 minute ago')
         self.assertEqual(format_duration(3600, lang='en'), '1 hour ago')
         self.assertEqual(format_duration(87878, lang='en'),
@@ -42,6 +48,7 @@ class TestDisplayTime(unittest.TestCase):
         self.assertEqual(format_duration(315365611, lang='en'),
                          '10 years, 1 hour, 33 minutes and 31 seconds ago')
         self.assertEqual(format_duration(81, lang='en'), '1 minute and 21 seconds ago')  # noqa pylint:disable=line-too-long
+        self.assertEqual(format_duration(736302, lang='en'), '1 week, 1 day, 12 hours, 31 minutes and 42 seconds ago')  # noqa pylint:disable=line-too-long
 
     def test_format_duration_exceptions(self):
         self.assertRaises(TypeError, format_duration, 45.7)
