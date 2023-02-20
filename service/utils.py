@@ -5,7 +5,7 @@ def likes(names, lang='ru'):
     """
     if not isinstance(names, list):
         raise TypeError(f'method accepts only List type.'
-                        f' You tried to use {type(names)}.')  # 123
+                        f' You tried to use {type(names)}.')
     match len(names):
         case 0:
             return 'No one likes this' if lang == 'en' else 'Никому это не нравится'  # noqa pylint:disable=line-too-long
