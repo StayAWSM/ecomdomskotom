@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'service.apps.ServiceConfig',
     'simple_history',
     'phonenumber_field',
+    'frontend',
 ]
 
 MIDDLEWARE = [
@@ -96,6 +97,14 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if not DEBUG:
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+        )
+    }
+
 
 try:
     from .settings_local import *  # noqa

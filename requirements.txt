@@ -11,6 +11,7 @@ phonenumbers==8.13.6
 # Test
 pytest==7.2.1
 pytest-django==4.5.2
+coverage==7.1.0
 
 # For lint
 prospector==1.8.4
