@@ -158,6 +158,9 @@ For **run tests**:
 ```commandline
 pytest 
 ```
-
+To see how much the **code is covered by tests**, run the command:
+```commandline
+coverage report
+```
 
 ### to be continuous...
