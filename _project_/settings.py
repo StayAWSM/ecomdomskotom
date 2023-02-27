@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'simple_history',
     'phonenumber_field',
     'frontend',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if not DEBUG:
     REST_FRAMEWORK = {
         'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.BrowsableAPIRenderer',
             'rest_framework.renderers.JSONRenderer',
         )
     }
