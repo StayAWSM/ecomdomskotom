@@ -1,9 +1,9 @@
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-from django.shortcuts import render
-from django.http import HttpResponse
-from .forms import ContactForm
-from .models import Contact
+from .forms import ContactForm, BookingForm
+from .models import Contact, Booking
+from rest_framework import viewsets
+from .serializers import BookingSerializer
 
 
 class ContactCreate(CreateView):
@@ -14,9 +14,19 @@ class ContactCreate(CreateView):
     template_name = 'service/contact_form.html'
 
 
-def home_page(request):
-    return HttpResponse('<h1>Home_page</h1>')
+class CreateBooking(CreateView):
+    form_class = BookingForm
+    model = Booking
+    # fields = '__all__'
+    template_name = 'service/home.html'
+    success_url = reverse_lazy('home_page')
 
 
-def index(request):
-    return render(request, 'service/index.html')
+# class UpdateBooking(UpdateView):
+#     model = Booking
+#     fields = '__all__'
+#     success_url = reverse_lazy('home_page')
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer

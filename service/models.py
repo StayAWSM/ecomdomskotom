@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 
 from core.models import BaseHistorical
-from .const import TABLE_NUMBERS, BOOKING_TIME_INTERVALS
+from .const import TABLE_NUMBERS  # BOOKING_TIME_INTERVALS
 
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -66,13 +66,13 @@ class Booking(BaseHistorical):
     )
     time_from = models.TimeField(
         verbose_name=_('Время от'),
-        choices=BOOKING_TIME_INTERVALS,
+        # choices=BOOKING_TIME_INTERVALS,
         blank=False,
-        null=False
+        null=False,
     )
     time_to = models.TimeField(
         verbose_name=_('Время до'),
-        choices=BOOKING_TIME_INTERVALS,
+        # choices=BOOKING_TIME_INTERVALS,
         blank=False,
         null=False
     )
