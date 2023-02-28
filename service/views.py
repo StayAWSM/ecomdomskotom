@@ -22,11 +22,6 @@ class CreateBooking(CreateView):
     success_url = reverse_lazy('home_page')
 
 
-# class UpdateBooking(UpdateView):
-#     model = Booking
-#     fields = '__all__'
-#     success_url = reverse_lazy('home_page')
-
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
