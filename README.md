@@ -163,4 +163,27 @@ To see how much the **code is covered by tests**, run the command:
 coverage report
 ```
 
+### Rules for commites
+
+**Description of commit:**
+- start with a capital letter
+- there is no dots at the end
+- basically in the past tense, unless this is an intermediate community in MR (Merge Request) or a large command of files, although more on this below
+- We use the approach of microcomittes
+
+**Branches:**
+- one branch for one task
+- the name of branch should contain the meaning of the task
+- in the Kebab Case style
+- inherited from Origin/Stage
+
+
+**Merge Request:**
+- understandable and laconic name
+- a detailed description containing an explanation for this merge request
+- link to the task in ASANA, if it exists
+- should have assignee, as a rule, this is the initiator of MR
+- should have revuvere, select depending on the area of Front/Back
+- write label depending on the task (Tests, Fix, Frontend, etc.)
+
 ### to be continuous...
