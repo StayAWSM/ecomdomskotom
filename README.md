@@ -163,7 +163,7 @@ To see how much the **code is covered by tests**, run the command:
 coverage report
 ```
 
-### Rules for commites
+### Rules for work with our Git Repository
 
 **Description of commit:**
 - start with a capital letter
