@@ -99,8 +99,8 @@ class Booking(BaseHistorical):
                                   'время С превышает время ПО.')
         if self.date < datetime.date.today():
             raise ValidationError('Некорректная дата бронирования.')
-        else:
-            super(Booking, self).save(*args, **kwargs)
+
+        super(Booking, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('Бронирование')
