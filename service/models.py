@@ -86,12 +86,21 @@ class Booking(BaseHistorical):
     def __str__(self):
         return f'{self.name}/{self.date}/{self.time_from}/{self.table_number}'
 
-    def clean(self):
+    # def clean(self):
+    #     if self.time_from > self.time_to:
+    #         raise ValidationError('Некорректное время бронирования:'
+    #                               'время С превышает время ПО.')
+    #     if self.date < datetime.date.today():
+    #         raise ValidationError('Некорректная дата бронирования.')
+
+    def save(self, *args, **kwargs):
         if self.time_from > self.time_to:
             raise ValidationError('Некорректное время бронирования:'
                                   'время С превышает время ПО.')
         if self.date < datetime.date.today():
             raise ValidationError('Некорректная дата бронирования.')
+        else:
+            super(Booking, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('Бронирование')

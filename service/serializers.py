@@ -2,10 +2,11 @@ from rest_framework import serializers
 from .models import Booking
 
 
-class BookingSerializer(serializers.HyperlinkedModelSerializer):
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = [
+            'uid',
             'name',
             'phone_number',
             'guest_number',
@@ -13,5 +14,5 @@ class BookingSerializer(serializers.HyperlinkedModelSerializer):
             'date',
             'time_from',
             'time_to',
-            'table_number',
+            'table_number'
         ]
