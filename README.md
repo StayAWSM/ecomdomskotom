@@ -167,23 +167,23 @@ coverage report
 
 **Description of commit:**
 - start with a **capital letter**
-- there is **no dots at the end**
-- basically **in the past tense**, unless this is an intermediate community in MR or a large command of files, although more on this below
-- We use the approach of **microcomittes**
+- **no dots at the end**
+- as a rule we use **the past tense**, but for intermediate commits in MR or large commits of files
+- We use the approach of **micro commits**
 
 **Branches:**
 - one branch **for one task**
 - the name of branch should contain the **meaning of the task**
-- in the **Kebab Case style**
-- inherited **from Origin/Stage**
+- use **kebab-case**
+- must inherit **from Origin/Stage**
 
 
 **Merge Request:**
-- understandable and laconic name
-- a detailed description containing an **explanation** for this merge request
-- link to the **task in ASANA**, if it exists
-- should have **assignee**, as a rule, this is the initiator of MR
-- should have **reviewer**, select depending on the area of Front/Back
+- understandable and short name
+- a **detailed description** of the merge request
+- link to the **task in ASANA**, if exists
+- should have **the assignee**, as a rule, i.e. the initiator of MR
+- should have **the reviewer**, selected depending on the area of Front/Back
 - write **label** depending on the task (Tests, Fix, Frontend, etc.)
 
-### to be continuous...
+### to be continued...
