@@ -93,3 +93,4 @@ class TestsBooking(APITestCase):
     def test_get_status_code(self):
         response = self.client.get(self.url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        #  just comment
