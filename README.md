@@ -163,4 +163,27 @@ To see how much the **code is covered by tests**, run the command:
 coverage report
 ```
 
-### to be continuous...
+### Rules for work with our Git Repository
+
+**Description of commit:**
+- start with a **capital letter**
+- **no dots at the end**
+- as a rule we use **the past tense**, but for intermediate commits in MR or large commits of files
+- We use the approach of **micro commits**
+
+**Branches:**
+- one branch **for one task**
+- the name of branch should contain the **meaning of the task**
+- use **kebab-case**
+- must inherit **from Origin/Stage**
+
+
+**Merge Request:**
+- understandable and short name
+- a **detailed description** of the merge request
+- link to the **task in ASANA**, if exists
+- should have **the assignee**, as a rule, i.e. the initiator of MR
+- should have **the reviewer**, selected depending on the area of Front/Back
+- write **label** depending on the task (Tests, Fix, Frontend, etc.)
+
+### to be continued...
