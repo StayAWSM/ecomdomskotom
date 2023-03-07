@@ -4,12 +4,11 @@
 # Environments
 env/
 venv/
-.venv
-.env
+.venv/
+.env/
 
 # Dev settings
 *.dev
-.env.dev
 docker-compose-dev.yml
 
 # Local settings

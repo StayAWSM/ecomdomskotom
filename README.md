@@ -7,8 +7,59 @@
   1. Install `pip` - [pip.pypa.io/en/stable/installing](https://pip.pypa.io/en/stable/installing/#installation)
   2. Install `virtualenv` - [virtualenv.pypa.io/en/stable/installation](https://virtualenv.pypa.io/en/stable/installation/#installation)
   3. Install `virtualenvwrapper` - [virtualenvwrapper.readthedocs.io/en/latest/install](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#installation) or command `pip install virtualenvwrapper`
-  4. install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
+  4. Install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
   5. Install and run `PostgreSQL`
+  6. Install `Docker`
+
+### General run:
+```commandline
+docker-compose up -d
+```
+Go to - http://localhost:8000
+
+### For run dev server:
+
+Create file `docker-compose-dev.yml` in source dir
+```yaml
+version: "3.0"
+services:
+  db:
+    container_name: dev_db_ecodomskotom
+    image: postgres:15-alpine
+    volumes:
+      - ~/.pg/pg_data/ecodomskotom_dev:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env.dev
+    networks:
+      - custom_dev
+
+  web:
+    container_name: dev_web_ecodomskotom
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - .env.dev
+    ports:
+      - "7777:8000"
+    command: >
+      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./:/ecodomskotom
+    networks:
+      - custom_dev
+networks:
+  custom_dev:
+    driver: bridge
+```
+
+and run
+```commandline
+docker-compose -p ecodomskotom_dev -f docker-compose-dev.yml up -d
+```
+
+Go to - http://localhost:7777
 
 ### Create new project, virtualenv and install requirements: ###
 ```
