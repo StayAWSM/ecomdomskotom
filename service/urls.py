@@ -3,7 +3,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'booking', BookingViewSet)
+router.register(r'api/booking', BookingViewSet)
 
 urlpatterns = [
     path('', ContactCreate.as_view(), name='contact_form'),
