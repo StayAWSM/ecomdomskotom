@@ -6,7 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 class TestsBooking(APITestCase):
-    url = f'https://{socket.gethostbyname(socket.gethostname())}/booking/'
+    url = f'https://{socket.gethostbyname(socket.gethostname())}/' \
+          f'api/booking/'
 
     def test_create_account(self):
         data = {
@@ -95,4 +96,3 @@ class TestsBooking(APITestCase):
     def test_get_status_code(self):
         response = self.client.get(self.url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        #  just comment
