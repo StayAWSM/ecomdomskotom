@@ -1,1 +1,9 @@
-print('hi bmw')
+
+a = '|'
+for a in range(20):
+    print('|       |        |')
+
+
+
+
+
