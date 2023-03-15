@@ -17,6 +17,7 @@ default:      # Runs before any stage / выполняется перед каж
 #    - export POSTGRES_PASSWORD='pgpass'; export POSTGRES_ENGINE='django.db.backends.postgresql_psycopg2'
 #    - export DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'; export SECRET_KEY='very_secret'; export DEBUG='0';
 #    - export DJANGO_SETTINGS_MODULE='_project_.settings';
+    - export DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'
     - python3 -m venv .venv
     - source .venv/bin/activate
     - pip3 install --upgrade pip
