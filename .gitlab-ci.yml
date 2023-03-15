@@ -27,7 +27,7 @@ build-job:
   # This job runs in the build stage, which runs first.
   stage: build
   services:
-    - name: postgis:latest
+    - name: postges:latest
       alias: postgres
     variables:
       POSTGRES_DB: postgres
