@@ -29,12 +29,7 @@ build-job:
   services:
     - name: postges:latest
       alias: postgres
-    variables:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST: postgres
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+
   script:
     - ls && uname -a        # Get info about system
     - echo $POSTGRES_PASSWORD
