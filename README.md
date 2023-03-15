@@ -18,7 +18,22 @@ docker-compose up -d
 Go to - http://localhost:8000
 
 ### For run dev server:
+Create file `.env.dev`
+```dockerfile
+POSTGRES_HOST=dev_db_ecodomskotom
+POSTGRES_PORT=5432
+POSTGRES_USER=pguser
+POSTGRES_PASSWORD=pgpass
+POSTGRES_DB=pgdb
+POSTGRES_ENGINE=django.db.backends.postgresql_psycopg2
 
+DJANGO_SETTINGS_MODULE=_project_.settings
+
+DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'
+SECRET_KEY=very_secret
+DEBUG=1
+
+```
 Create file `docker-compose-dev.yml` in source dir
 ```yaml
 version: "3.0"
@@ -56,7 +71,7 @@ networks:
 
 and run
 ```commandline
-docker-compose -p ecodomskotom_dev -f docker-compose-dev.yml up -d
+docker-compose -p ecodomskotom_dev -f docker-compose-dev.yml up web
 ```
 
 Go to - http://localhost:7777
