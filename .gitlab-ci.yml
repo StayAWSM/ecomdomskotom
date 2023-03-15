@@ -27,6 +27,7 @@ build-job:
   stage: build
   script:
     - ls && uname -a        # Get info about system
+    - echo $POSTGRES_PASSWORD
     - python3 manage.py migrate
     - python3 manage.py check
 
