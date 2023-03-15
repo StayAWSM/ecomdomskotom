@@ -13,7 +13,9 @@ default:      # Runs before any stage / выполняется перед каж
     paths:
       - .venv     # The directory where the commands will be executed / из какой директории будут выполнены команды
   before_script:
-    - echo -e "SECRET_KEY = 'not so secret!'\nALLOWED_HOSTS = ['*']\n" > ./_project_/settings_local.py  #  Set up local_settings
+    - export POSTGRES_HOST=db_ecodomskotom; export POSTGRES_PORT=5432; export POSTGRES_USER=pguser
+    - export POSTGRES_PASSWORD=pgpass; export POSTGRES_ENGINE=django.db.backends.postgresql_psycopg2
+    - export DJANGO_ALLOWED_HOSTS=localhost; export SECRET_KEY=very_secret; export DEBUG=0
     - python3 -m venv .venv
     - source .venv/bin/activate
     - pip3 install --upgrade pip

@@ -104,9 +104,3 @@ if not DEBUG:
             'rest_framework.renderers.JSONRenderer',
         )
     }
-
-
-try:
-    from .settings_local import *  # noqa
-except ImportError:
-    pass
