@@ -13,11 +13,10 @@ default:      # Runs before any stage / выполняется перед каж
     paths:
       - .venv     # The directory where the commands will be executed / из какой директории будут выполнены команды
   before_script:
-#    - export POSTGRES_HOST='db_ecodomskotom'; export POSTGRES_PORT='5432'; export POSTGRES_USER='pguser'
-#    - export POSTGRES_PASSWORD='pgpass'; export POSTGRES_ENGINE='django.db.backends.postgresql_psycopg2'
-#    - export DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'; export SECRET_KEY='very_secret'; export DEBUG='0';
-#    - export DJANGO_SETTINGS_MODULE='_project_.settings';
-    - export DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'
+    - export POSTGRES_HOST='db_ecodomskotom'; export POSTGRES_PORT='5432'; export POSTGRES_USER='pguser'
+    - export POSTGRES_PASSWORD='pgpass'; export POSTGRES_ENGINE='django.db.backends.postgresql_psycopg2'
+    - export DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'; export SECRET_KEY='very_secret'; export DEBUG='0';
+    - export DJANGO_SETTINGS_MODULE='_project_.settings';
     - python3 -m venv .venv
     - source .venv/bin/activate
     - pip3 install --upgrade pip
@@ -27,6 +26,15 @@ default:      # Runs before any stage / выполняется перед каж
 build-job:
   # This job runs in the build stage, which runs first.
   stage: build
+  services:
+    - name: postgis:latest
+      alias: postgres
+    variables:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
   script:
     - ls && uname -a        # Get info about system
     - echo $POSTGRES_PASSWORD
