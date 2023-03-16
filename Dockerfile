@@ -1,30 +1,18 @@
-# pull official base image / вытаскиваем официальное базовое изображение
-FROM python:3.9.6-alpine
+FROM python:3.10.9-slim
 
-# set work directory / устанавливаем рабочую директорию
-# сюда пренесутся все файлы из BASE_DIR
-WORKDIR /usr/src/ecodomskotom
+SHELL ["/bin/bash", "-c"]
 
-# set environment variables / устанавливаем переменные среды
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install psycopg2 dependencies / установка postgres
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
-
-# install dependencies / устанаваливаем зависимости
 RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
 
-# copy entrypoint.sh / копируем команду точки входа
-COPY ./entrypoint.sh .
-RUN sed -i 's/\r$//g' /usr/src/ecodomskotom/entrypoint.sh
-RUN chmod +x /usr/src/ecodomskotom/entrypoint.sh
+RUN apt update && apt -qy install gcc libjpeg-dev libxslt-dev \
+    libpq-dev gettext cron openssh-client flake8 locales vim \
+    tree nodejs npm
 
-# copy project / копируем проект
+WORKDIR /ecodomskotom
+
 COPY . .
 
-# run entrypoint.sh
-ENTRYPOINT ["/usr/src/ecodomskotom/entrypoint.sh"]
+RUN pip install -r requirements.txt
