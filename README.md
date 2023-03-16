@@ -9,9 +9,12 @@
   3. Install `virtualenvwrapper` - [virtualenvwrapper.readthedocs.io/en/latest/install](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#installation) or command `pip install virtualenvwrapper`
   4. Install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
   5. Install and run `PostgreSQL`
-  6. Install `Docker`
+  6. Install and run`Docker`
 
 ### General run:
+```commandline
+docker build -t ecodomskotom .
+```
 ```commandline
 docker-compose up -d
 ```
@@ -73,7 +76,21 @@ and run
 ```commandline
 docker-compose -p ecodomskotom_dev -f docker-compose-dev.yml up web
 ```
+To check logs in real time:
 
+```commandline
+docker logs -f <container_name>  
+```
+
+To go in container terminal use:
+```commandline
+docker exec -it <container_name> /bin/bash  
+```
+
+To go psql terminal:
+```commandline
+psql -U pguser -d pgdb
+```
 Go to - http://localhost:7777
 
 ### Create new project, virtualenv and install requirements: ###
@@ -170,16 +187,24 @@ pg_ctl -D path/to/initial_db -o "-p 5433" start
 
 If you want to start gitlab-runner on your local system - follow [official Docs](https://docs.gitlab.com/runner/install/)
 
-For start gitlab-runner on Docker:
+Create the Docker volume:
+
 ```
-docker run -d --name gitlab-runner --restart always \
-  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:latest
+docker volume create gitlab-runner-config
+```
+Start the GitLab Runner container using the volume we just created:
+
+```
+docker run -d --name <proj_name>-gitlab-runner --restart always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v gitlab-runner-config:/etc/gitlab-runner \
+    gitlab/gitlab-runner:latest
 ```
 _For MacOs use `/Users/Shared` instead of `srv`_ 
+
+Register your runner:
 ```
-docker exec -it gitlab-runner gitlab-runner register
+docker exec -it <proj_name>-gitlab-runner gitlab-runner register
 ```
 Then:
 
