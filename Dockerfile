@@ -28,3 +28,6 @@ COPY . .
 
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/ecodomskotom/entrypoint.sh"]
+
+
+
