@@ -39,7 +39,7 @@ build-job:
   services:
     - docker:dind
   script:
-    - docker-compose up --abort-on-container-exit
+    - docker compose up --abort-on-container-exit
 
 lint:
   stage: validate
