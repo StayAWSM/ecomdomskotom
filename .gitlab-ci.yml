@@ -35,8 +35,7 @@ default:      # Runs before any stage / выполняется перед каж
 #    - python3 manage.py check
 build-job:
   # This job runs in the build stage, which runs first.
-  image:
-    - docker:dind
+  image: docker:dind
   script:
     - docker-compose up --abort-on-container-exit
 
