@@ -37,9 +37,9 @@ build-job:
   stage: build
   # This job runs in the build stage, which runs first.
   services:
-    - docker:dind
+    - docker:latest
   script:
-    - docker compose up --abort-on-container-exit
+    - docker-compose up --abort-on-container-exit
 
 lint:
   stage: validate
