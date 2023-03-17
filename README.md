@@ -7,8 +7,91 @@
   1. Install `pip` - [pip.pypa.io/en/stable/installing](https://pip.pypa.io/en/stable/installing/#installation)
   2. Install `virtualenv` - [virtualenv.pypa.io/en/stable/installation](https://virtualenv.pypa.io/en/stable/installation/#installation)
   3. Install `virtualenvwrapper` - [virtualenvwrapper.readthedocs.io/en/latest/install](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#installation) or command `pip install virtualenvwrapper`
-  4. install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
+  4. Install `gdal` - [pypi.python.org/pypi/GDAL](https://pypi.python.org/pypi/GDAL) or command `pip install gdal`
   5. Install and run `PostgreSQL`
+  6. Install and run`Docker`
+
+### General run:
+```commandline
+docker build -t ecodomskotom .
+```
+```commandline
+docker-compose up -d
+```
+Go to - http://localhost:8000
+
+### For run dev server:
+Create file `.env.dev`
+```dockerfile
+POSTGRES_HOST=dev_db_ecodomskotom
+POSTGRES_PORT=5432
+POSTGRES_USER=pguser
+POSTGRES_PASSWORD=pgpass
+POSTGRES_DB=pgdb
+POSTGRES_ENGINE=django.db.backends.postgresql_psycopg2
+
+DJANGO_SETTINGS_MODULE=_project_.settings
+
+DJANGO_ALLOWED_HOSTS='127.0.0.1 [::1] 0.0.0.0 localhost'
+SECRET_KEY=very_secret
+DEBUG=1
+
+```
+Create file `docker-compose-dev.yml` in source dir
+```yaml
+version: "3.0"
+services:
+  db:
+    container_name: dev_db_ecodomskotom
+    image: postgres:15-alpine
+    volumes:
+      - ~/.pg/pg_data/ecodomskotom_dev:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env.dev
+    networks:
+      - custom_dev
+
+  web:
+    container_name: dev_web_ecodomskotom
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - .env.dev
+    ports:
+      - "7777:8000"
+    command: >
+      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./:/ecodomskotom
+    networks:
+      - custom_dev
+networks:
+  custom_dev:
+    driver: bridge
+```
+
+and run
+```commandline
+docker-compose -p ecodomskotom_dev -f docker-compose-dev.yml up web
+```
+To check logs in real time:
+
+```commandline
+docker logs -f <container_name>  
+```
+
+To go in container terminal use:
+```commandline
+docker exec -it <container_name> /bin/bash  
+```
+
+To go psql terminal:
+```commandline
+psql -U pguser -d pgdb
+```
+Go to - http://localhost:7777
 
 ### Create new project, virtualenv and install requirements: ###
 ```
@@ -104,16 +187,24 @@ pg_ctl -D path/to/initial_db -o "-p 5433" start
 
 If you want to start gitlab-runner on your local system - follow [official Docs](https://docs.gitlab.com/runner/install/)
 
-For start gitlab-runner on Docker:
+Create the Docker volume:
+
 ```
-docker run -d --name gitlab-runner --restart always \
-  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:latest
+docker volume create gitlab-runner-config
+```
+Start the GitLab Runner container using the volume we just created:
+
+```
+docker run -d --name <proj_name>-gitlab-runner --restart always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v gitlab-runner-config:/etc/gitlab-runner \
+    gitlab/gitlab-runner:latest
 ```
 _For MacOs use `/Users/Shared` instead of `srv`_ 
+
+Register your runner:
 ```
-docker exec -it gitlab-runner gitlab-runner register
+docker exec -it <proj_name>-gitlab-runner gitlab-runner register
 ```
 Then:
 
@@ -163,4 +254,27 @@ To see how much the **code is covered by tests**, run the command:
 coverage report
 ```
 
-### to be continuous...
+### Rules for work with our Git Repository
+
+**Description of commit:**
+- start with a **capital letter**
+- **no dots at the end**
+- as a rule we use **the past tense**, but for intermediate commits in MR or large commits of files
+- We use the approach of **micro commits**
+
+**Branches:**
+- one branch **for one task**
+- the name of branch should contain the **meaning of the task**
+- use **kebab-case**
+- must inherit **from Origin/Stage**
+
+
+**Merge Request:**
+- understandable and short name
+- a **detailed description** of the merge request
+- link to the **task in ASANA**, if exists
+- should have **the assignee**, as a rule, i.e. the initiator of MR
+- should have **the reviewer**, selected depending on the area of Front/Back
+- write **label** depending on the task (Tests, Fix, Frontend, etc.)
+
+### to be continued...
