@@ -1,6 +1,6 @@
 numbers = int(input())
-if numbers >= -1 >= 17:
+if -1 <= numbers <= 17:
     print('принадлежит')
-if numbers >= 17:
+if numbers > 17:
     print('не принадлежит')
 
